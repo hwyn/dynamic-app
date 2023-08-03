@@ -1,0 +1,8 @@
+<mat-form-field floatLabel="always">
+  <mat-label>{{props.label}}</mat-label>
+  <mat-select [app-events]="events" [formControl]="control">
+    <mat-option *ngFor="let item of props.source" [value]="item.value">
+      <label>{{ item.label }}</label>
+    </mat-option>
+  </mat-select>
+</mat-form-field>

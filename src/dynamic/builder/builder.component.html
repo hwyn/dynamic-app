@@ -1,0 +1,21 @@
+<ng-template #fields let-additional let-className="className" let-style="style">
+  <div *ngFor="let rowFields of additional.fieldRows" fxLayout="row" [fxLayoutGap]="additional.spacing + 'px'" [ngStyle]="getRowStyle(additional, style)" [class]="className">
+    <div *ngFor="let field of rowFields" [fxFlex]="'col-' + field.layout.column" [attr.data-visibility]="field.visibility">
+      <app-field [builderField]="field"></app-field>
+    </div>
+  </div>
+</ng-template>
+
+<ng-container *ngIf="builder.ready">
+  <ng-container *ngIf="additional.length === 1">
+    <ng-container
+      *ngTemplateOutlet="fields; context: { $implicit: additional[0], className: className, style: style }"></ng-container>
+  </ng-container>
+
+  <div *ngIf="additional.length > 1" fxLayout="row">
+    <div *ngFor="let item of additional" [fxFlex]="'col-' + item.xs" [class]="item.className"
+      [ngStyle]="item.style">
+      <ng-container *ngTemplateOutlet="fields; context: { $implicit: item }"></ng-container>
+    </div>
+  </div>
+</ng-container>
